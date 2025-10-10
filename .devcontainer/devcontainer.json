@@ -5,6 +5,10 @@
         "humao.rest-client"
       ]
     }
-  }
+  },
+  "containerEnv": {
+    "GITHUB_EXPANDED_TOKEN": "${{ secrets.GH_ORG_TOKEN }}"
+  },
+  "postCreateCommand": "if [ -n \"$GITHUB_EXPANDED_TOKEN\" ]; then export GITHUB_TOKEN=\"\"; gh auth login --with-token < <(echo $GITHUB_EXPANDED_TOKEN); fi"
 }
 
